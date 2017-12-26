@@ -1,4 +1,4 @@
-# trello-vue
+# Clone of Trello using Vue
 
 > A Vue.js project
 
