@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="main">
     <h1>{{ msg }}</h1>
     <input v-model="listNumber" type="number">
     <ul >
@@ -23,10 +23,10 @@ const lists = [{
 }]
 
 export default {
-  name: 'HelloWorld',
+  name: 'Board',
   data () {
     return {
-      msg: 'Main Board',
+      msg: 'Trello Clone',
       listNumber: 1,
       lists
     }

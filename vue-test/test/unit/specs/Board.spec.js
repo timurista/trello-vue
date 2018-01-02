@@ -1,13 +1,12 @@
 import Vue from 'vue'
 import Board from '@/components/Board'
 
-describe('HelloWorld.vue', () => {
-  beforeEach()
+describe('Board', () => {
   it('should render correct contents', () => {
-    const Constructor = Vue.extend(HelloWorld)
+    const Constructor = Vue.extend(Board)
     const vm = new Constructor().$mount()
-    expect(vm.$el.querySelector('.hello h1').textContent)
-    .toEqual('Welcome to Your Vue.js App')
+    expect(vm.$el.querySelector('.main h1').textContent)
+    .toEqual('Trello Clone')
   })
 })
 

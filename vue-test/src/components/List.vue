@@ -10,11 +10,6 @@ export default {
       default: 'some title'
     }
   },
-  data () {
-    return {
-      title: this.title
-    }
-  },
   name: 'ListItem'
 }
 </script>
