@@ -1,7 +1,11 @@
 <template>
-  <div class="main">
+<div class="main">
+  <div class="nav">
+    <a class="header-link">Boards</a>
     <h1>{{ msg }}</h1>
-    <input v-model="listNumber" type="number">
+    <a class="user-avatar"></a>
+  </div>
+  <div class="content">
     <ul >
     <list-item v-for="list in lists"
       :title="list.title"
@@ -9,6 +13,7 @@
     </list-item>
     </ul>
   </div>
+</div>
 </template>
 
 <script>
@@ -52,5 +57,43 @@ li {
 }
 a {
   color: #42b983;
+}
+
+
+.nav {
+  display: flex;
+  background-color: #026aa7;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: hsla(0,0%,100%,.6);
+}
+
+.nav h1 {
+  margin: 0.125em;
+  flex-grow: .5;
+}
+
+.nav a:hover {
+  background-color: hsla(0,0%,100%,.6);
+  color: hsla(0,0%,100%,.9);
+  cursor: pointer;
+}
+
+a.user-avatar {
+  background-color: #c8c8c8;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+}
+
+a.header-link {
+  background: hsla(0,0%,100%,.3);
+  border: 1px solid hsla(0,0%,100%,.4);
+  color: hsla(0,0%,100%,.8);
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin-left: 16px;
 }
 </style>

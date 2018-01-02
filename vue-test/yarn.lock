@@ -5244,6 +5244,12 @@ postcss-modules-values@^1.1.0:
     icss-replace-symbols "^1.1.0"
     postcss "^6.0.1"
 
+postcss-nesting@^4.2.1:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/postcss-nesting/-/postcss-nesting-4.2.1.tgz#0483bce338b3f0828ced90ff530b29b98b00300d"
+  dependencies:
+    postcss "^6.0.11"
+
 postcss-normalize-charset@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/postcss-normalize-charset/-/postcss-normalize-charset-1.1.1.tgz#ef9ee71212d7fe759c78ed162f61ed62b5cb93f1"
@@ -5340,6 +5346,14 @@ postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.14, postcss@^6.0.8:
     chalk "^2.3.0"
     source-map "^0.6.1"
     supports-color "^4.4.0"
+
+postcss@^6.0.11:
+  version "6.0.15"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.15.tgz#f460cd6269fede0d1bf6defff0b934a9845d974d"
+  dependencies:
+    chalk "^2.3.0"
+    source-map "^0.6.1"
+    supports-color "^5.1.0"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -6328,6 +6342,12 @@ supports-color@^3.1.2, supports-color@^3.2.3:
 supports-color@^4.0.0, supports-color@^4.2.1, supports-color@^4.4.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-4.5.0.tgz#be7a0de484dec5c5cddf8b3d59125044912f635b"
+  dependencies:
+    has-flag "^2.0.0"
+
+supports-color@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.1.0.tgz#058a021d1b619f7ddf3980d712ea3590ce7de3d5"
   dependencies:
     has-flag "^2.0.0"
 

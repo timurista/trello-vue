@@ -1,38 +1,21 @@
 import Vue from 'vue'
 import Board from '@/components/Board'
+let Constructor
+let vm
 
 describe('Board', () => {
-  it('should render correct contents', () => {
-    const Constructor = Vue.extend(Board)
-    const vm = new Constructor().$mount()
+  beforeEach(() => { Constructor = Vue.extend(Board) })
+  it('should render title Trello Clone', () => {
+    vm = new Constructor().$mount()
     expect(vm.$el.querySelector('.main h1').textContent)
     .toEqual('Trello Clone')
   })
+
+  describe('board header', () => {
+    beforeEach(() => { vm = new Constructor().$mount() })
+    it('should list the current board', () => {
+      expect(vm.$el.querySelector('a.header-link').textContent)
+      .toEqual('Boards')
+    })
+  })
 })
-
-// main view
-// [boards you can search by]
-
-// basic components
-// Boards, can filter
-  // user is able to click a search button and be taken to a board
-  // board can be deleted, added, or updated
-  // store lists
-  // boards can be private, or public only
-  // public boards show to any user
-  // private boards show to only user logged in
-// Lists
-  // user clicks list and can rename them
-  // store cards
-  // in flex box view
-// Cards
-  // users can upload a description
-  // users can set a title
-  // users can add comment
-  // users can add an image
-
-  // Users
-    // users register
-    // users sign in
-    // users can log out
-    // board information is saved
