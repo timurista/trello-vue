@@ -62,16 +62,15 @@ a {
 
 .nav {
   display: flex;
-  background-color: #026aa7;
+  background: #026aa7;
   margin: 0 auto;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   color: hsla(0,0%,100%,.6);
 }
 
 .nav h1 {
   margin: 0.125em;
-  flex-grow: .5;
 }
 
 .nav a:hover {
@@ -96,4 +95,9 @@ a.header-link {
   padding: 8px 16px;
   margin-left: 16px;
 }
+
+ul {
+  display: flex;
+}
+
 </style>
