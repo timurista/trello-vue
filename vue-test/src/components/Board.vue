@@ -9,6 +9,7 @@
     <ul >
     <list-item v-for="list in lists"
       :title="list.title"
+      :cards="list.cards"
       v-bind:key="list.id">
     </list-item>
     </ul>
@@ -22,9 +23,7 @@ import ListItem from './List'
 const lists = [{
   id: 1,
   title: 'title1',
-  items: [{
-    text: 'an item'
-  }]
+  cards: []
 }]
 
 export default {

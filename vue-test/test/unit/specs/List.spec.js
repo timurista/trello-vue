@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import List from '@/components/List'
+import { mount } from 'avoriaz'
+import sinon from 'sinon'
 let Constructor
 let vm
+let wrapper
 
 const triggerEvent = (Component, selector, event) => {
   const el = Component.$el.querySelector(selector)
@@ -45,15 +48,43 @@ describe('List', () => {
       })
     })
   })
-  describe('cards', () => {
+  describe('card composer', () => {
+    beforeEach(() => {
+      const propsData = { title: 'passed in title', cards: [] }
+      wrapper = mount(List, { propsData })
+    })
     it('should render default card placeholder', () => {
-      expect(vm.$el.querySelector('.open-card-composer').textContent).toBe('Add a Card...')
+      expect(wrapper.first('.open-card-composer').text()).toBe('Add a Card...')
     })
     describe('when the user clicks on the card', () => {
-      it('should add a new temp card and close button', () => {
-        triggerClick(vm, '.open-card-composer')
-        expect('.compose-card textarea').not.toBe(null)
-        expect('.close').not.toBe(null)
+      beforeEach(() => {
+        wrapper.first('.open-card-composer').trigger('click')
+      })
+      it('should add a new temp card with textarea', () => {
+        expect(wrapper.contains('.card-composer-textarea')).toBe(true)
+      })
+      it('should add a close button', () => {
+        expect(wrapper.contains('.cancel')).toBe(true)
+      })
+      it('should add a add-card button', () => {
+        expect(wrapper.first('.add-card').text()).toBe('Add')
+      })
+      describe('when user clicks on close button', () => {
+        beforeEach(() => wrapper.first('.cancel').trigger('click'))
+        it('should close the open card composer', () => {
+          expect(wrapper.contains('.card-composer-textarea')).toBe(false)
+          expect(wrapper.contains('.open-card-composer')).toBe(true)
+        })
+      })
+      describe('when user clicks on add button', () => {
+        it('should add card to the list', () => {
+          const title = 'example title'
+          wrapper.vm.newCardTitle = title
+          wrapper.first('.add-card').trigger('click')
+          expect(wrapper.vm.cards.length).toBe(1)
+          expect(wrapper.vm.cards[0].title).toBe(title)
+          expect(wrapper.contains('.list-card-title')).toBe(true)
+        })
       })
     })
   })
