@@ -158,10 +158,9 @@ li.list-card {
 }
 
 .card-composer-actions {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  margin-top: 8px;
+  padding: 8px 0 0;
+  display: inline;
 }
 .add-card {
   padding: 8px 16px;
@@ -169,20 +168,23 @@ li.list-card {
   border-radius: 2px;
   color: #ddd;
   font-weight: bold;
+  float: left;
 }
 
 .cancel {
   padding: 8px 16px;
   color: rgb(120, 120, 120);
   font-weight: bold;
+  float: left;
 }
 .card-composer-textarea {
-  padding: 4px 8px;
+  padding: 6px 6px;
   border: 0;
   border-radius: 3px;
   resize: none;
   font-size: 1em;
   font-family: 'Avenir';
+  font-weight: 500;
   &:focus {
     outline:0;
   }
