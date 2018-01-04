@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import List from '@/components/List'
-import { mount } from 'avoriaz'
 let Constructor
 let vm
 
@@ -35,16 +34,26 @@ describe('List', () => {
       describe('when the input is blurred', () => {
         beforeEach(() => {
           triggerClick(vm, 'a.list-header')
-          // BROKEN FIX
-          // let el = vm.$el.querySelector('#list-header')
-          // const windowEvent = new window.Event('blur')
-          // el.dispatchEvent(windowEvent)
-          // vm._watcher.run()
         })
-        it('should bring back title', () => {
-          expect(vm.$el.querySelector('a.list-header').textContent)
-            .toBe('passed in title')
+        it('should bring back title', async () => {
+          triggerClick(vm, 'a.save-btn')
+          await Vue.nextTick(() => {
+            expect(vm.$el.querySelector('a.list-header').textContent)
+              .toBe('passed in title')
+          })
         })
+      })
+    })
+  })
+  describe('cards', () => {
+    it('should render default card placeholder', () => {
+      expect(vm.$el.querySelector('.open-card-composer').textContent).toBe('Add a Card...')
+    })
+    describe('when the user clicks on the card', () => {
+      it('should add a new temp card and close button', () => {
+        triggerClick(vm, '.open-card-composer')
+        expect('.compose-card textarea').not.toBe(null)
+        expect('.close').not.toBe(null)
       })
     })
   })

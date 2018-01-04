@@ -12,22 +12,33 @@
       >
       <a type="submit" class="save-btn">...</a>
     </div>
+    <ul class="cards">
+      <li v-for="card in cards" v-bind:key="card.id">
+        {{card}}
+      </li>
+    </ul>
+    <div v-if="composeCard" class="card-composer">
+      <textarea class="card-composer-textarea">
+      </textarea>
+      <a class="cancel" @click="composeCard = !composeCard">X</a>
+    </div>
+    <a v-if="!composeCard" class="open-card-composer" @click="composeCard = !composeCard">Add a Card...</a>
   </li>
 </template>
 
 <script>
 export default {
-  props: ['title'],
+  props: ['title', 'cards'],
   name: 'ListItem',
   data() {
     return {
-      edit: false
+      edit: false,
+      composeCard: false
     }
   },
   methods: {
     saveEdit: function(el) {
       this.edit = !this.edit
-      const { listHeaderEdit } = this.$refs
 
       if (this.edit) {
         this.$nextTick(() => {
