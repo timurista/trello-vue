@@ -13,9 +13,11 @@
       <a type="submit" class="save-btn">...</a>
     </div>
     <ul class="cards">
-      <li v-for="card in cards" v-bind:key="card.id" class="list-card">
-        <a class="list-card-title">{{card.title}}</a>
-      </li>
+      <draggable v-model="cards" :options="{draggable:'.list-card'}">
+        <li v-for="card in cards" v-bind:key="card.id" class="list-card">
+          <a class="list-card-title">{{card.title}}</a>
+        </li>
+      </draggable>
     </ul>
     <div v-if="composeCard" class="card-composer">
       <textarea class="card-composer-textarea" v-model="newCardTitle">
@@ -30,6 +32,8 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
+
 export default {
   props: ['title', 'cards'],
   name: 'ListItem',
@@ -60,6 +64,9 @@ export default {
         })
       }
     }
+  },
+  components: {
+    draggable
   }
 }
 </script>
@@ -119,6 +126,14 @@ li.list-card {
   margin-top: 8px;
   padding: 0;
   margin-bottom: 8px;
+}
+
+li.list-card.sortable-ghost {
+  background-color: #888;
+
+  .list-card-title {
+    opacity: 0;
+  }
 }
 
 .list-card-title {
