@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import List from '@/components/List'
 import { mount } from 'avoriaz'
-import sinon from 'sinon'
+
+// import sinon from 'sinon'
 let Constructor
 let vm
 let wrapper
@@ -16,6 +17,8 @@ const triggerEvent = (Component, selector, event) => {
 function triggerClick(Component, selector) {
   triggerEvent(Component, selector, 'click')
 }
+
+Vue.config.ignoredElements = ['icon']
 
 describe('List', () => {
   beforeEach(() => {
@@ -83,9 +86,23 @@ describe('List', () => {
           wrapper.first('.add-card').trigger('click')
           expect(wrapper.vm.cards.length).toBe(1)
           expect(wrapper.vm.cards[0].title).toBe(title)
-          expect(wrapper.contains('.list-card-title')).toBe(true)
+          Vue.nextTick(() => {
+            expect(wrapper.contains('.list-card')).toBe(true)
+          })
         })
       })
+    })
+  })
+  describe('card', () => {
+    beforeEach(() => {
+      const propsData = {
+        title: 'passed in title',
+        cards: [{ title: 'card1' }, { title: 'card2' }]
+      }
+      wrapper = mount(List, { propsData })
+    })
+    it('contains an edit icon', () => {
+      expect(wrapper.contains('.list-card-edit-button')).toBe(true)
     })
   })
 })

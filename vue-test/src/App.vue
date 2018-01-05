@@ -5,12 +5,22 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Board from './components/Board'
+import 'vue-awesome/icons'
+
+/* Register component with one of 2 methods */
+
+import Icon from 'vue-awesome/components/Icon'
+
+// globally (in your main .js file)
+Vue.component('icon', Icon)
 
 export default {
   name: 'app',
   components: {
-    Board
+    Board,
+    Icon
   }
 }
 </script>

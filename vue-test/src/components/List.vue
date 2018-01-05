@@ -16,6 +16,7 @@
       <draggable v-model="cards" :options="{draggable:'.list-card'}">
         <li v-for="card in cards" v-bind:key="card.id" class="list-card">
           <a class="list-card-title">{{card.title}}</a>
+          <a class="list-card-edit-button"><icon name="pencil"></icon></a>
         </li>
       </draggable>
     </ul>
@@ -126,6 +127,19 @@ li.list-card {
   margin-top: 8px;
   padding: 0;
   margin-bottom: 8px;
+  display: flex;
+
+  &:hover {
+    background-color: #efefef;
+  }
+}
+
+li.list-card:hover .list-card-edit-button {
+  opacity: 0.6;
+  color: #666;
+  &:hover {
+    color: #000;
+  }
 }
 
 li.list-card.sortable-ghost {
@@ -145,6 +159,24 @@ li.list-card.sortable-ghost {
   word-wrap: break-word;
   text-align: left;
   color: #4d4d4d;
+}
+
+.list-card-edit-button {
+  padding: 6px;
+  margin-left: auto;
+  order: 2;
+  opacity: 0;
+  color: #000;
+
+  &:hover {
+    background-color: #bbb;
+    color: #000;
+  }
+
+  & .fa-icon {
+    position: relative;
+    top: 2px;
+  }
 }
 
 .open-card-composer {
