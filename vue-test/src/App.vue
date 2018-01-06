@@ -8,6 +8,7 @@
 import Vue from 'vue'
 import VModal from 'vue-js-modal'
 import Board from './components/Board'
+import store from './store'
 
 import 'vue-awesome/icons'
 
@@ -21,6 +22,7 @@ Vue.use(VModal)
 
 export default {
   name: 'app',
+  store,
   components: {
     Board,
     Icon

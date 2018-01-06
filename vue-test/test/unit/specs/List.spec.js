@@ -2,7 +2,6 @@ import Vue from 'vue'
 import List from '@/components/List'
 import { mount } from 'avoriaz'
 
-// import sinon from 'sinon'
 let Constructor
 let vm
 let wrapper
