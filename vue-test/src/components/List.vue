@@ -14,12 +14,13 @@
     </div>
     <ul class="cards">
       <draggable v-model="cards" :options="{draggable:'.list-card'}">
-        <li v-for="card in cards" v-bind:key="card.id" class="list-card">
+        <li v-for="card in cards" v-bind:key="card.id" class="list-card" @click="() => openDetailModal(card)">
           <a class="list-card-title">{{card.title}}</a>
           <a class="list-card-edit-button"><icon name="pencil"></icon></a>
         </li>
       </draggable>
     </ul>
+    <card-detail-modal ref="detailModal"></card-detail-modal>
     <div v-if="composeCard" class="card-composer">
       <textarea class="card-composer-textarea" v-model="newCardTitle">
       </textarea>
@@ -34,6 +35,7 @@
 
 <script>
 import draggable from 'vuedraggable'
+import CardDetailModal from './CardDetailModal'
 
 export default {
   props: ['title', 'cards'],
@@ -64,10 +66,16 @@ export default {
           this.$refs.listHeaderEdit.select()
         })
       }
+    },
+    openDetailModal: function(cardData) {
+      const { title } = cardData
+      console.log(title)
+      this.$modal.show('cardDetail', { title })
     }
   },
   components: {
-    draggable
+    draggable,
+    'card-detail-modal': CardDetailModal
   }
 }
 </script>

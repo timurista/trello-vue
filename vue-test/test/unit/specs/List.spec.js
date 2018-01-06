@@ -18,7 +18,7 @@ function triggerClick(Component, selector) {
   triggerEvent(Component, selector, 'click')
 }
 
-Vue.config.ignoredElements = ['icon']
+Vue.config.ignoredElements = ['icon', 'modal']
 
 describe('List', () => {
   beforeEach(() => {
@@ -103,6 +103,19 @@ describe('List', () => {
     })
     it('contains an edit icon', () => {
       expect(wrapper.contains('.list-card-edit-button')).toBe(true)
+    })
+    describe('clicking the first card', () => {
+      beforeEach(() => {
+        wrapper.first('.list-card').trigger('click')
+      })
+      it('brings up card detail modal', () => {
+        expect(wrapper.contains('.card-detail-modal')).toBe(true)
+      })
+      it('sends detail modal the title of the card', () => {
+        Vue.nextTick(() => {
+          expect(wrapper.first('.detail-title').text()).toBe('card1')
+        })
+      })
     })
   })
 })

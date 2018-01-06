@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Board from '@/components/Board'
+
 let Constructor
 let vm
+
+Vue.config.ignoredElements = ['icon', 'modal']
 
 describe('Board', () => {
   beforeEach(() => { Constructor = Vue.extend(Board) })
