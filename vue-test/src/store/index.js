@@ -1,46 +1,61 @@
-    // src/store.js
-
 import Vue from 'vue';
 import Vuex from 'vuex';
-Vue.use(Vuex)
+import { stateFromServer, saveStateToServer} from './serverStorage';
+Vue.use(Vuex);
+
+export const actions = {
+  ADD_LIST: function({ commit }, newList) {
+    commit('ADD_LIST_MUTATION', {
+      newList,
+      active: true
+    })
+  },
+  ADD_LIST_ITEM: function({ commit }, newListItem, listId) {
+    commit('ADD_LIST_ITEM', {
+      newListItem
+    })
+  },
+};
+
+
+const getListById = (state, id) => state.lists.filter(val => val.id == id)[0];
+
+export const getters = {
+  getListById,
+  getListItemById: (state, listId, id) => getListById(state, listId)
+    .items.filter(listItem => listItem.id == id)[0],
+  active: state => {
+    var filtered = state.todos.filter(function(el) {
+      return el.active === true
+    })
+    return filtered
+  },
+};
+
+const { getListItemById } = getters;
+
+export const mutations = {
+  ADD_LIST_MUTATION: function(state, newList) {
+    state.lists.push(newList);
+    saveStateToServer(state);
+  },
+  ADD_LIST_ITEM_MUTATION: function(state, newListItem, listId) {
+    getListById(state, listId).items.push(newListItem);
+    saveStateToServer(state);
+  },
+  UPDATE_LIST_ITEM_NAME_MUTATION: function(state, listId, itemId, newName) {
+    getListItemById(state, listId, itemId).name = newName;
+    saveStateToServer(state);
+  },
+};
+
 const store = new Vuex.Store({
   state: {
-    todos: []
+    lists: stateFromServer || {}
   },
-  actions: {
-    ADD_TODO: function({ commit }, new_todo) {
-      var set_new = {
-        todo: new_todo,
-        status: false
-      }
-      commit('ADD_TODO_MUTATION', set_new)
-    },
-    COMPLETE_TODO: function({ commit }, todo) {
-      commit('COMPLETE_TODO_MUTATION', todo)
-    }
-  },
-  mutations: {
-    ADD_TODO_MUTATION: function(state, new_todo) {
-      state.todos.push(new_todo)
-    },
-    COMPLETE_TODO_MUTATION: function(state, todo) {
-      state.todos.find(x => x.todo === todo).status = true
-    }
-  },
-  getters: {
-    not_done: state => {
-      var filtered = state.todos.filter(function(el) {
-        return el.status === false
-      })
-      return filtered
-    },
-    done: state => {
-      var filtered = state.todos.filter(function(el) {
-        return el.status === true
-      })
-      return filtered
-    }
-  }
+  actions,
+  mutations,
+  getters
 })
 
 export default store
